@@ -282,7 +282,7 @@ namespace N1MMlistener
 
     class Program
     {
-        private const int listenPort = 12060; // Default N1MM broadcast port
+        private const int listenPort = 13063; // Default N1MM broadcast port
 
         // Helper class to parse XML datagrams
         public static class XmlConvert
@@ -330,8 +330,8 @@ namespace N1MMlistener
                         Spot spot = new Spot();
                         spot = XmlConvert.DeserializeObject<Spot>(message);
                         if (spot.Action == "add")
-                            Console.WriteLine(string.Format("{0} Fq: {1,9:N2} DX: {2,-10} DE: {3,-10}",
-                                spot.Timestamp, float.Parse(spot.Frequency), spot.Dxcall, spot.Spottercall));
+                            Console.WriteLine(string.Format("{0} Fq: {1} DX: {2,-10} DE: {3,-10} action: {4}",
+                                spot.Timestamp, spot.Frequency, spot.Dxcall, spot.Spottercall, spot.Action));
                     }
                     else if (doc.Element("AppInfo") != null)
                     {
