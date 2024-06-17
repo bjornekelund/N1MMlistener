@@ -2,7 +2,7 @@
 // Receives UDP broadcasts on listenPort, parses XML into an object and prints info
 // Intended as starting point for development of more applications such as 
 // live score board, out-of-band alarm, etc.
-// By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-02-05
+// By Björn Ekelund SM7IUN sm7iun@ssa.se 2024-06-17
 
 using System;
 using System.Collections.Generic;
@@ -329,8 +329,8 @@ namespace N1MMlistener
                     {
                         Spot spot = new Spot();
                         spot = XmlConvert.DeserializeObject<Spot>(message);
-                        Console.WriteLine(string.Format("{0} Fq: {1} DX: {2,-10} DE: {3,-10} action: {4} status: {5}",
-                            spot.Timestamp, spot.Frequency, spot.Dxcall, spot.Spottercall, spot.Action, spot.Action));
+                        Console.WriteLine(string.Format("{0} Fq: {1} DX: {2,-10} DE: {3,-10} action: {4} status: {5} timestamp: {6}",
+                            spot.Timestamp, spot.Frequency, spot.Dxcall, spot.Spottercall, spot.Action, spot.Status, spot.Timestamp));
                     }
                     else if (doc.Element("AppInfo") != null)
                     {
