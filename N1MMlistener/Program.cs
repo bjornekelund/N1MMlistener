@@ -5,14 +5,14 @@
 // By Björn Ekelund SM7IUN sm7iun@ssa.se 2019-02-05
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Xml.Linq;
-using System.Xml;
-using System.Xml.Serialization;
-using System.IO;
 using System.Text;
-using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace N1MMlistener
 {
@@ -282,7 +282,7 @@ namespace N1MMlistener
 
     class Program
     {
-        private const int listenPort = 12060; // Default N1MM broadcast port
+        private const int listenPort = 12060; // Default broadcast port
 
         // Helper class to parse XML datagrams
         public static class XmlConvert
@@ -329,9 +329,8 @@ namespace N1MMlistener
                     {
                         Spot spot = new Spot();
                         spot = XmlConvert.DeserializeObject<Spot>(message);
-                        if (spot.Action == "add" || spot.Action == "delete")
-                            Console.WriteLine(string.Format("{0} Fq: {1} DX: {2,-10} DE: {3,-10} action: {4}",
-                                spot.Timestamp, spot.Frequency, spot.Dxcall, spot.Spottercall, spot.Action));
+                        Console.WriteLine(string.Format("{0} Fq: {1} DX: {2,-10} DE: {3,-10} action: {4} status: {5}",
+                            spot.Timestamp, spot.Frequency, spot.Dxcall, spot.Spottercall, spot.Action, spot.Action));
                     }
                     else if (doc.Element("AppInfo") != null)
                     {
